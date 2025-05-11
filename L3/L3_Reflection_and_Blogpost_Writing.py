@@ -115,12 +115,23 @@ meta_reviewer = autogen.AssistantAgent(
 
 # %%
 def reflection_message(recipient, messages, sender, config):
+    """
+    Generates a review prompt for a reviewer agent.
+    This function is called by the autogen framework during nested chat orchestration.
+    Args:
+        recipient: The reviewer agent (SEO_reviewer, LegalReviewer, or EthicsReviewer) that will receive the message.
+        messages: The message history of the overall chat.
+        sender: The Critic agent, who is sending the review request.
+        config: Configuration settings (not used in this function).
+    Returns:
+        A string containing the review prompt, including the content to be reviewed.
+    """
     print(f"recipient: {recipient.name}")
     print(f"sender: {sender.name}")
-    print(f"messages: {messages}")  
+    print(f"messages: {messages}")
     print(f"config: {config}")
     
-    return f'''Review the following content. 
+    return f'''Review the following content.
             \n\n {recipient.chat_messages_for_summary(sender)[-1]['content']}'''
 
 review_chats = [
