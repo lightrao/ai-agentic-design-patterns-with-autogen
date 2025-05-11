@@ -115,6 +115,11 @@ meta_reviewer = autogen.AssistantAgent(
 
 # %%
 def reflection_message(recipient, messages, sender, config):
+    print(f"recipient: {recipient.name}")
+    print(f"sender: {sender.name}")
+    print(f"messages: {messages}")  
+    print(f"config: {config}")
+    
     return f'''Review the following content. 
             \n\n {recipient.chat_messages_for_summary(sender)[-1]['content']}'''
 
